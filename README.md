@@ -1,7 +1,7 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
-<H3>EX. NO.1</H3>
-<H3>DATE</H3>
+<H3> SHAKTHI VEL V </H3>
+<H3> 212224240149 </H3>
+<H3> EX. NO.1 </H3>
+<H3> 21/4/2026 </H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,11 +37,92 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+
+```py
+#import libraries
+
+from google.colab import files
+import pandas as pd
+import io 
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+```
+```py
+#Read the dataset from drive
+df = pd.read_csv('/content/Churn_Modelling.csv');
+print(df)
+```
+```py
+#split the dataset
+X = df.iloc[:, :-1].values
+print(X)
+y = df.iloc[:, -1].values
+print(y)
+```
+```py
+#Finding Missing Values
+print(df.isnull().sum())
+```
+```py
+#Handling Missing values
+df.fillna(df.select_dtypes(include='number').mean().round(1), inplace=True)
+print(df.isnull().sum())
+y = df.iloc[:, -1].values
+print(y)
+```
+```py
+df.drop(['Surname','Geography','Gender'], axis=1, inplace = True)
+df.info()
+```
+```py
+#Check for Duplicates
+df.duplicated()
+```
+```py
+#Detect Outliers
+print(df['EstimatedSalary'].describe())
+```
+```py
+#When we normalize the dataset it brings the value of all the features
+#between 0 and 1 so that all the columns re in the same range,
+#and thus there is no dominant feature.
+
+scaler = MinMaxScaler()
+df1 = pd.DataFrame(scaler.fit_transform(df))
+print(df1)
+```
+```py
+#splitting the data for training and testing
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2)
+
+#'test_size = 0.2' means 20% test data and 80% train data
+print(X_train)
+print(len(X_train))
+print(X_test)
+print(len(X_test))
+```
 
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+
+<img width="1490" height="673" alt="image" src="https://github.com/user-attachments/assets/dbc517e3-c776-43c9-9361-2bdd96bd2c8b" />
+
+<img width="1075" height="331" alt="image" src="https://github.com/user-attachments/assets/b3657bf8-5a4f-46a8-8561-025b54b2e630" />
+
+<img width="1295" height="415" alt="image" src="https://github.com/user-attachments/assets/32ae90ee-bc49-425a-a88b-d59461dc5b8f" />
+
+<img width="1183" height="514" alt="image" src="https://github.com/user-attachments/assets/518a859c-03f5-4da4-8602-2a70e1cc2718" />
+
+<img width="1257" height="473" alt="image" src="https://github.com/user-attachments/assets/6c201762-f6b7-448e-ad4a-fe4f16290d3a" />
+
+<img width="1082" height="640" alt="image" src="https://github.com/user-attachments/assets/ecbe117e-92ab-43e9-9c1f-6452acc347b3" />
+
+<img width="1227" height="288" alt="image" src="https://github.com/user-attachments/assets/1097255a-6b53-403f-b015-0a67913320be" />
+
+<img width="1243" height="509" alt="image" src="https://github.com/user-attachments/assets/07229ef7-688e-4475-b348-a4d3a3ab4bd1" />
+
+<img width="1335" height="588" alt="image" src="https://github.com/user-attachments/assets/3ee0522b-b06a-4615-b863-33d1c2d7816a" />
 
 
 ## RESULT:
